@@ -1,0 +1,149 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kuber-foo
+  labels:
+    app: kuber-foo
+spec:
+  replicas: 3
+  minReadySeconds: 10
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: http-server-1
+  template:
+    metadata:
+      labels:
+        app: http-server-1
+    spec:
+      containers:
+        - name: myapp
+          image: dodexq/kuber_loadbalancing:v2
+          ports:
+          - containerPort: 80
+          livenessProbe:
+            exec:
+              command:
+              - cat
+              - /var/www/html/index.php
+            initialDelaySeconds: 0
+            periodSeconds: 5
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 3
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: foo-service
+spec:
+  selector:
+    app: http-server-1
+  ports:
+  - port: 80
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kuber-bar
+  labels:
+    app: kuber-bar
+spec:
+  replicas: 3
+  minReadySeconds: 10
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: http-server-2
+  template:
+    metadata:
+      labels:
+        app: http-server-2
+    spec:
+      containers:
+        - name: myapp
+          image: dodexq/kuber_loadbalancing:v2
+          ports:
+            - containerPort: 80
+          livenessProbe:
+            exec:
+              command:
+              - cat
+              - /var/www/html/index.php
+            initialDelaySeconds: 0
+            periodSeconds: 5
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 3
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: bar-service
+spec:
+  selector:
+    app: http-server-2
+  ports:
+  - port: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: example-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    # nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+    # nginx.ingress.kubernetes.io/configuration-snippet: |-
+    #   proxy_ssl_server_name on;
+    #   proxy_ssl_name $host;
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - foo.dodex.site
+    - bar.dodex.site
+    - board.dodex.site
+    secretName: app-tls
+  rules:
+  - host: foo.dodex.site
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend: 
+          service:
+            name: foo-service
+            port:
+              number: 80
+  - host: bar.dodex.site
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: bar-service
+            port:
+              number: 80
+  - host: board.dodex.site
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend: 
+          service:
+            name: kubernetes-dashboard
+            port:
+              number: 443
+
+---
