@@ -1,0 +1,75 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: resume-deployment
+  labels:
+    app: resume
+spec:
+  replicas: 3
+  minReadySeconds: 10
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: resume
+  template:
+    metadata:
+      labels:
+        app: resume
+    spec:
+      containers:
+        - name: resume
+          image: dodexq/resume:v1
+          ports:
+          - containerPort: 80
+          livenessProbe:
+            exec:
+              command:
+              - cat
+              - /var/www/html/index.html
+            initialDelaySeconds: 0
+            periodSeconds: 5
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 3
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: resume-svc
+spec:
+  selector:
+    app: resume
+  ports:
+  - port: 80
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: resume-ingress
+  namespace: resume
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - dodex.site
+    secretName: app-tls
+  rules:
+  - host: dodex.site
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend: 
+          service:
+            name: resume-svc
+            port:
+              number: 80
+---
