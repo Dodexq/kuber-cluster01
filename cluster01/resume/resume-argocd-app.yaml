@@ -4,15 +4,15 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: Validate=false
   name: resume-application
-  namespace: argocd
+  namespace: resume
 spec:
-  project: default
+  project: resume
   source:
-    repoURL: https://github.com/dodexq/kuber_start.git
+    repoURL: https://github.com/dodexq/kuber-cluster01.git
     targetRevision: HEAD
     path: argo_apps
   destination:
-    server: https://kubernetes.default.svc
+    server: https://kubernetes.resume.svc
     namespace: resume
   syncPolicy:
     syncOptions:
@@ -21,25 +21,3 @@ spec:
       selfHeal: true
       prune: true
 ---
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   annotations:
-#     argocd.argoproj.io/sync-options: Validate=false
-#   name: argocd-application
-#   namespace: argocd
-# spec:
-#   project: argocd
-#   source:
-#     repoURL: https://github.com/dodexq/kuber_start.git
-#     targetRevision: HEAD
-#     path: argo_apps
-#   destination:
-#     server: https://kubernetes.default.svc
-#     namespace: default
-#   syncPolicy:
-#     syncOptions:
-#     - CreateNamespace=true
-#     automated:
-#       selfHeal: true
-#       prune: true

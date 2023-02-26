@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: resume
-          image: dodexq/resume:v1
+          image: dodexq/resume:v2
           ports:
           - containerPort: 80
           livenessProbe:
