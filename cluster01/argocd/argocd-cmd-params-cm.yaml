@@ -145,7 +145,7 @@ data:
   reposerver.enable.git.submodule: "true"
 
   # Disable TLS on the HTTP endpoint
-  dexserver.disable.tls: "false"
+  dexserver.disable.tls: "true"
 
   ## ApplicationSet Controller Properties
   # Enable leader election for controller manager. Enabling this will ensure there is only one active controller manager.
