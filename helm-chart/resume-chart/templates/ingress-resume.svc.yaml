@@ -2,11 +2,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: resume-deployment
+  name: {{ .Release.Name }}-deployment
   labels:
     app: resume
 spec:
-  replicas: 3
+  replicas: {{ .Values.replicaCount }}
   minReadySeconds: 10
   strategy:
     rollingUpdate:
@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: resume
-          image: dodexq/resume:v2.2
+          image: {{ .Values.contaiter.image }}
           ports:
           - containerPort: 80
           livenessProbe:
@@ -40,7 +40,7 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: resume-svc
+  name: {{ .Release.Name }}-svc
 spec:
   selector:
     app: resume
@@ -69,7 +69,7 @@ spec:
         path: /
         backend: 
           service:
-            name: resume-svc
+            name: {{ .Release.Name }}-svc
             port:
               number: 80
 ---
