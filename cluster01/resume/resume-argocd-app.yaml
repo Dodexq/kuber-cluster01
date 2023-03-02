@@ -7,16 +7,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/dodexq/kuber-cluster01.git
+    repoURL: 'https://github.com/dodexq/kuber-cluster01'
     targetRevision: HEAD
     path: helm-chart/resume-chart
   destination:
-    server: https://kubernetes.default.svc
+    server: 'https://kubernetes.default.svc'
     namespace: default
-  syncPolicy:
-    syncOptions:
-    - CreateNamespace=true
-    automated:
-      selfHeal: true
-      prune: true
----

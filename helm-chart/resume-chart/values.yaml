@@ -1,5 +1,5 @@
 ---
 contaiter:
-  image: dodexq/resume:v2.2
+  image: dodexq/resume:v2.3
 
 replicaCount: 3

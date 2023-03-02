@@ -24,18 +24,29 @@ spec:
       containers:
         - name: resume
           image: {{ .Values.contaiter.image }}
+          imagePullPolicy: IfNotPresent
           ports:
           - containerPort: 80
           livenessProbe:
-            exec:
-              command:
-              - cat
-              - /var/www/html/index.html
-            initialDelaySeconds: 0
-            periodSeconds: 5
-            timeoutSeconds: 1
+            httpGet:
+              path: /app/health/livenes
+              port: http
+              scheme: "HTTP"
+            initialDelaySeconds: 5
+            periodSeconds: 15
+            timeoutSeconds: 5
             successThreshold: 1
-            failureThreshold: 3
+            failureThreshold: 5
+          readinessProbe:
+            httpGet:
+              path: /app/health/readnes
+              port: http
+              scheme: "HTTP"
+            initialDelaySeconds: 5
+            periodSeconds: 15
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 5
 ---
 kind: Service
 apiVersion: v1
