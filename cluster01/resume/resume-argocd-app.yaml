@@ -1,19 +1,18 @@
-lapiVersion: argoproj.io/v1alpha1
+apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-options: Validate=false
   name: resume-application
-  namespace: resume
 spec:
-  project: resume
+  project: default
   source:
     repoURL: https://github.com/dodexq/kuber-cluster01.git
     targetRevision: HEAD
-    path: argo_apps
+    path: argo_apps/resume
   destination:
-    server: https://kubernetes.resume.svc
-    namespace: resume
+    server: https://kubernetes.default.svc
+    namespace: default
   syncPolicy:
     syncOptions:
     - CreateNamespace=true
