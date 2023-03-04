@@ -23,30 +23,30 @@ spec:
     spec:
       containers:
         - name: resume
-          image: dodexq/resume:v2.3
+          image: dodexq/resume:v2.4
           imagePullPolicy: IfNotPresent
           ports:
           - containerPort: 80
-          livenessProbe:
-            httpGet:
-              path: /app/health/livenes
-              port: http
-              scheme: "HTTP"
-            initialDelaySeconds: 5
-            periodSeconds: 15
-            timeoutSeconds: 5
-            successThreshold: 1
-            failureThreshold: 5
-          readinessProbe:
-            httpGet:
-              path: /app/health/readnes
-              port: http
-              scheme: "HTTP"
-            initialDelaySeconds: 5
-            periodSeconds: 15
-            timeoutSeconds: 5
-            successThreshold: 1
-            failureThreshold: 5
+          # livenessProbe:
+          #   httpGet:
+          #     path: /app/health/livenes
+          #     port: 80
+          #     scheme: "HTTP"
+          #   initialDelaySeconds: 5
+          #   periodSeconds: 15
+          #   timeoutSeconds: 5
+          #   successThreshold: 1
+          #   failureThreshold: 5
+          # readinessProbe:
+          #   httpGet:
+          #     path: /app/health/readnes
+          #     port: 80
+          #     scheme: "HTTP"
+          #   initialDelaySeconds: 5
+          #   periodSeconds: 15
+          #   timeoutSeconds: 5
+          #   successThreshold: 1
+          #   failureThreshold: 5
 ---
 kind: Service
 apiVersion: v1
@@ -70,7 +70,7 @@ spec:
   tls:
   - hosts:
     - dodex.site
-    secretName: app-tls
+    secretName: resume-tls
   rules:
   - host: dodex.site
     http:

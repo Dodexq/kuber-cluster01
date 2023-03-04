@@ -23,14 +23,14 @@ spec:
     spec:
       containers:
         - name: resume
-          image: dodexq/resume:v2.2
+          image: dodexq/resume:v2.4
           imagePullPolicy: IfNotPresent
           ports:
           - containerPort: 80
           livenessProbe:
             httpGet:
               path: /app/health/livenes
-              port: http
+              port: 80
               scheme: "HTTP"
             initialDelaySeconds: 5
             periodSeconds: 15
@@ -40,7 +40,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /app/health/readnes
-              port: http
+              port: 80
               scheme: "HTTP"
             initialDelaySeconds: 5
             periodSeconds: 15

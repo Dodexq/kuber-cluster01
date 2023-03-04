@@ -6,16 +6,13 @@ metadata:
   namespace: argocd
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
-    # nginx.ingress.kubernetes.io/backend-protocol: HTTPS
-    # nginx.ingress.kubernetes.io/configuration-snippet: |-
-    #   proxy_ssl_server_name on;
-    #   proxy_ssl_name $host;
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
 spec:
   ingressClassName: nginx
   tls:
   - hosts:
     - argocd.dodex.site
-    secretName: app-tls
+    secretName: argocd-tls
   rules:
   - host: argocd.dodex.site
     http:

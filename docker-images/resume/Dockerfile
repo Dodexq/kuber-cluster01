@@ -1,6 +1,6 @@
 FROM php:7.2.34-apache
 
-ADD	assets /var/www/html/assets
+ADD assets /var/www/html/assets
 
 ADD css /var/www/html/css
 
