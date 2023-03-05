@@ -3,13 +3,13 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-options: Validate=false
-  name: resume-ingress
+  name: argocd-app
 spec:
-  project: resume
+  project: default
   source:
-    repoURL: https://github.com/dodexq/kuber_cluster01.git
+    repoURL: 'https://github.com/Dodexq/kuber-cluster01'
     targetRevision: HEAD
-    path: argo-apps
+    path: helm-chart/resume-chart
   destination:
     server: https://kubernetes.default.svc
     namespace: resume

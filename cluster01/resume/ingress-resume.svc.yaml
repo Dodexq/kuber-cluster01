@@ -47,6 +47,13 @@ spec:
             timeoutSeconds: 5
             successThreshold: 1
             failureThreshold: 5
+          volumeMounts:
+          - name: data
+            mountPath: "/var/www/html/persistent"
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: persistent-claim
 ---
 kind: Service
 apiVersion: v1

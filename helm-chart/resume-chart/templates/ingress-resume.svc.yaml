@@ -1,4 +1,16 @@
 ---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: persistent-claim
+spec:
+  storageClassName: "hostpath"
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 250Mi
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -47,6 +59,13 @@ spec:
             timeoutSeconds: 5
             successThreshold: 1
             failureThreshold: 5
+          volumeMounts:
+          - name: data
+            mountPath: {{ .Values.contaiter.volumeMounts.mountPath }}
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: persistent-claim
 ---
 kind: Service
 apiVersion: v1
