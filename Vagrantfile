@@ -13,7 +13,7 @@ Vagrant.configure("2") do |config|
     server.vm.network "forwarded_port", guest: 1080, host: 8080
     server.vm.network "forwarded_port", guest: 10443, host: 8043
     server.vm.provider "virtualbox" do |vb|
-      vb.memory = "4096"
+      vb.memory = "6144"
       vb.name = "kube-start"
       vb.cpus = "8"
 	end

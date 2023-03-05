@@ -70,7 +70,7 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: {{ .Release.Name }}-svc
+  name: resume-svc
 spec:
   selector:
     app: resume
@@ -98,7 +98,7 @@ spec:
         path: /
         backend: 
           service:
-            name: {{ .Release.Name }}-svc
+            name: resume-svc
             port:
               number: 80
 ---
