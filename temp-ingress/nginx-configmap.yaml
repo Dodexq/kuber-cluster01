@@ -1,7 +1,7 @@
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: ingress-real-ip
+  name: ingress-nginx-controller
   namespace: ingress-nginx
 data:
   allow-snippet-annotations: "true"
