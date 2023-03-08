@@ -74,13 +74,13 @@ metadata:
   annotations:
     annotations:
     #Choice certificate
-    cert-manager.io/cluster-issuer: letsencrypt-prod
-    #cert-manager.io/cluster-issuer: letsencrypt-staging
+    #cert-manager.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/cluster-issuer: letsencrypt-staging
     #Add real ip header
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      proxy_set_header     X-Real-IP $remote_addr;
-      proxy_set_header     X-Forwarded-For $proxy_add_x_forwarded_for;
-      proxy_set_header     Host $http_host;
+    # nginx.ingress.kubernetes.io/configuration-snippet: |
+    #   proxy_set_header     X-Real-IP $remote_addr;
+    #   proxy_set_header     X-Forwarded-For $proxy_add_x_forwarded_for;
+    #   proxy_set_header     Host $http_host;
 spec:
   ingressClassName: nginx
   tls:

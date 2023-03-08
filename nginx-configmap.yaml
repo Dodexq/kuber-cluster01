@@ -4,5 +4,7 @@ metadata:
   name: nginx-config
   namespace: ingress-nginx
 data:
-  use_forwarded_headers: "true"
-  use_proxy_protocol: "true"
+  use-proxy-protocol: "true"
+  proxy-protocol-header-timeout: "5s"
+  use-forwarded-headers: "true"
+  add-headers: "X-Real-IP $remote_addr;"
