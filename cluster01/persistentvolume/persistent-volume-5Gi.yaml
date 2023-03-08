@@ -4,7 +4,7 @@ kind: PersistentVolume
 metadata:
   name: example-volume
 spec:
-  storageClassName: ""
+  storageClassName: hostpath
   persistentVolumeReclaimPolicy: Retain
   claimRef:
     name: example-volume

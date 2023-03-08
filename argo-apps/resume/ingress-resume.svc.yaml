@@ -1,17 +1,4 @@
 ---
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: resume-pvc
-spec:
-  storageClassName: ""
-  volumeName: example-volume
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
----
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -19,13 +6,8 @@ metadata:
   labels:
     app: resume
 spec:
+  serviceName: "resume"
   replicas: 3
-  minReadySeconds: 10
-  strategy:
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 1
-    type: RollingUpdate
   selector:
     matchLabels:
       app: resume
@@ -35,38 +17,42 @@ spec:
         app: resume
     spec:
       containers:
-        - name: resume
-          image: dodexq/resume:v2.4
-          imagePullPolicy: IfNotPresent
-          ports:
-          - containerPort: 80
-          livenessProbe:
-            httpGet:
-              path: /app/health/livenes
-              port: 80
-              scheme: "HTTP"
-            initialDelaySeconds: 5
-            periodSeconds: 15
-            timeoutSeconds: 5
-            successThreshold: 1
-            failureThreshold: 5
-          readinessProbe:
-            httpGet:
-              path: /app/health/readnes
-              port: 80
-              scheme: "HTTP"
-            initialDelaySeconds: 5
-            periodSeconds: 15
-            timeoutSeconds: 5
-            successThreshold: 1
-            failureThreshold: 5
-          volumeMounts:
-          - name: data
-            mountPath: "/var/www/html/persistent"
-      volumes:
-      - name: data
-        persistentVolumeClaim:
-          claimName: resume-pvc
+      - name: resume
+        image: dodexq/resume:v2.4
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+        livenessProbe:
+          httpGet:
+            path: /app/health/livenes
+            port: 80
+            scheme: "HTTP"
+          initialDelaySeconds: 5
+          periodSeconds: 15
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 5
+        readinessProbe:
+          httpGet:
+            path: /app/health/readnes
+            port: 80
+            scheme: "HTTP"
+          initialDelaySeconds: 5
+          periodSeconds: 15
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 5
+        volumeMounts:
+        - name: data
+          mountPath: "/var/www/html/persistent"
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
 ---
 kind: Service
 apiVersion: v1
@@ -88,8 +74,8 @@ metadata:
   annotations:
     annotations:
     #Choice certificate
-    #cert-manager.io/cluster-issuer: letsencrypt-prod
-    cert-manager.io/cluster-issuer: letsencrypt-staging
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    #cert-manager.io/cluster-issuer: letsencrypt-staging
     #Add real ip header
     nginx.ingress.kubernetes.io/configuration-snippet: |
       proxy_set_header     X-Real-IP $remote_addr;
