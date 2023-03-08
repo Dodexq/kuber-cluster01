@@ -1,7 +1,14 @@
 ---
 contaiter:
   image: dodexq/resume:v2.4
+
   volumeMounts:
     mountPath: "/var/www/html/persistent"
 replicaCount: 3
+
+metadata:
+  annotations:
+  #Choice certificate
+  #cert-manager.io/cluster-issuer: letsencrypt-prod
+    cluster-issuer: letsencrypt-staging
 ---

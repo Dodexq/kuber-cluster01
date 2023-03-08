@@ -60,6 +60,7 @@ apiVersion: v1
 metadata:
   name: resume-svc
 spec:
+  externalTrafficPolicy: Local
   selector:
     app: resume
   ports:

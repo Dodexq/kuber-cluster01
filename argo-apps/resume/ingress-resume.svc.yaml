@@ -1,6 +1,19 @@
 ---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: resume-pvc
+spec:
+  storageClassName: ""
+  volumeName: example-volume
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: resume-deployment
   labels:
@@ -53,7 +66,7 @@ spec:
       volumes:
       - name: data
         persistentVolumeClaim:
-          claimName: persistent-claim
+          claimName: resume-pvc
 ---
 kind: Service
 apiVersion: v1
@@ -65,13 +78,23 @@ spec:
   ports:
   - port: 80
   type: ClusterIP
+  externalTrafficPolicy: Local
+  type: NodePort
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: resume-ingress
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
+    annotations:
+    #Choice certificate
+    #cert-manager.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/cluster-issuer: letsencrypt-staging
+    #Add real ip header
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      proxy_set_header     X-Real-IP $remote_addr;
+      proxy_set_header     X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header     Host $http_host;
 spec:
   ingressClassName: nginx
   tls:

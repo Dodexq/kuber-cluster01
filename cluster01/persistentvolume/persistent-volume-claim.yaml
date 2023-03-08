@@ -4,6 +4,7 @@ metadata:
   name: persistent-claim
 spec:
   storageClassName: hostpath
+  volumeName: example-volume
   accessModes:
     - ReadWriteOnce
   resources:
