@@ -7,5 +7,5 @@ data:
   allow-snippet-annotations: "true"
   enable-real-ip: "true"
   use-forwarded-headers: "true"
-  proxy-real-ip-cidr: "10.240.0.0/16,10.96.0.1/12,172.18.0.100/32"
+  proxy-real-ip-cidr: ""
   use-proxy-protocol: "false"

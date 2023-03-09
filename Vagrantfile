@@ -6,12 +6,19 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "kube-start" do |server|
     server.vm.box = "geerlingguy/ubuntu2004"
-    server.vm.hostname = "kube"
-    #server.vm.network "public_network", ip: "192.168.0.20"
-    server.vm.network :private_network, ip: "192.168.56.170"
-    server.vm.network "forwarded_port", guest: 4545, host: 4545
-    server.vm.network "forwarded_port", guest: 1080, host: 8080
-    server.vm.network "forwarded_port", guest: 10443, host: 8043
+    server.vm.hostname = "kube"  
+    server.vm.network "public_network", ip: "192.168.0.18"
+
+  # default router
+    server.vm.provision "shell",
+    run: "always",
+    inline: "route add default gw 192.168.0.1"
+
+  # delete default gw on eth0
+    server.vm.provision "shell",
+    run: "always",
+    inline: "eval `route -n | awk '{ if ($8 ==\"eth0\" && $2 != \"0.0.0.0\") print \"route del default gw \" $2; }'`"
+
     server.vm.provider "virtualbox" do |vb|
       vb.memory = "8192"
       vb.name = "kube-start"
