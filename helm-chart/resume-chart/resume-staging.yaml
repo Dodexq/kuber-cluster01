@@ -1,5 +1,3 @@
----
 metadata:
   annotations:
     cluster-issuer: letsencrypt-staging
----

@@ -1,4 +1,3 @@
----
 contaiter:
   image: dodexq/resume:v2.4
 
@@ -8,7 +7,4 @@ replicaCount: 3
 
 metadata:
   annotations:
-  #Choice certificate
-  #cert-manager.io/cluster-issuer: letsencrypt-prod
     cluster-issuer: letsencrypt-staging
----
