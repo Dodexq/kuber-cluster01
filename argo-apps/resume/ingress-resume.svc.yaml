@@ -1,16 +1,4 @@
 ---
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: local-volume
-spec:
-  storageClassName: local-storage
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      storage: 5Gi
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -35,7 +23,7 @@ spec:
     spec:
       containers:
         - name: resume
-          image: dodexq/resume:v2.4
+          image: dodexq/resume:v2.5
           imagePullPolicy: IfNotPresent
           ports:
           - containerPort: 80
