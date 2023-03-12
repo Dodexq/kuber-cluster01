@@ -5,7 +5,7 @@ metadata:
   name: pv-loki
 spec:
   capacity:
-    storage: 15Gi
+    storage: 30Gi
   volumeMode: Filesystem
   accessModes:
   - ReadWriteOnce
