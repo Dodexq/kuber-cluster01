@@ -9,6 +9,9 @@ Vagrant.configure("2") do |config|
     server.vm.hostname = "kube"  
     server.vm.network "public_network", ip: "192.168.0.18"
 
+  # shell > "VAGRANT_EXPERIMENTAL=disks vagrant up"
+    server.vm.disk :disk, size: "40GB", name: "extra_storage"
+  
   # default router
     server.vm.provision "shell",
     run: "always",
@@ -24,6 +27,6 @@ Vagrant.configure("2") do |config|
       vb.name = "kube-start"
       vb.cpus = "8"
 	end
-  #server.vm.provision "shell", path: "data/*.sh"
+  # server.vm.provision "shell", path: "data/*.sh"
 	end
 end
