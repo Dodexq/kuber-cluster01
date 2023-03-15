@@ -26,7 +26,7 @@ Vagrant.configure("2") do |config|
       vb.memory = "8192"
       vb.name = "kube-start"
       vb.cpus = "8"
-	end
-  # server.vm.provision "shell", path: "data/*.sh"
-	end
+  end
+  server.vm.provision "shell", path: "./provision.sh"
+  end
 end

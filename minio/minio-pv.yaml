@@ -4,13 +4,14 @@ metadata:
   name: s3-pv
 spec:
   capacity:
-    storage: 40Gi
+    storage: 39Gi
+  volumeMode: Filesystem
   accessModes:
   - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   storageClassName: s3-sc
   local:
-    path: "/s3"
+    path: /mnt/s3
   nodeAffinity:
     required:
       nodeSelectorTerms:
