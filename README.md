@@ -45,6 +45,18 @@
 6. create file system: `mkfs.xfs /dev/mapper/s3vg-s3lv`
 7. create s3 folder: `mkdir /s3` && `chmod 777 /s3`
 8. configure automount: `nano /etc/fstab` append `/dev/mapper/s3vg-s3lv /s3 xfs defaults,nofail 0 0` and `mount -a` display all Filesystems: `df -h`
+9. minio install `cd /s3/minio` && `mkdir data1-1 data1-2 data2-1 data2-2 data3-1 data3-2 data4-1 data4-2`
+10. `chmod -R 777 data1-1 data1-2 data2-1 data2-2 data3-1 data3-2 data4-1 data4-2`
+11. exec `cd ./minio/docker/` && `docker-compose`
+
+#
+
+<p align="center"> 
+<a href="https://raw.githubusercontent.com/Dodexq/kuber-cluster01/main/screenshots/minio_test.png" rel="some text"><img src="https://raw.githubusercontent.com/Dodexq/kuber-cluster01/main/screenshots/minio_test.png" alt="" width="500" /></a>
+</p>
+
+#
+
 
 ## Docker images
 https://hub.docker.com/u/dodexq

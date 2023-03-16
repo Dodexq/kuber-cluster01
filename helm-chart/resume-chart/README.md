@@ -3,3 +3,5 @@
 ### ArgoCD: Login: `admin` Password: `Gst4Kuber%`
 
 ### GitLab: Login: `guest` Password: `Gst4Kuber%` 
+
+### Minio: Login: `admin` Password: `Gst4Kuber%`
