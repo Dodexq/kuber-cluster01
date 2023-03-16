@@ -43,7 +43,7 @@
 4. create volume group: `pvcreate /dev/sdb1` && `vgcreate s3vg /dev/sdb1` display lvm vg: `vgdisplay s3vg`
 5. create logical volume: `sudo lvcreate -l 100%FREE -n s3lv s3vg` display lvm lv: `lvs`
 6. create file system: `mkfs.xfs /dev/mapper/s3vg-s3lv`
-7. create s3 folder: `mkdir /s3` && `chmod 777 /s3` && `semanage fcontext -a -s system_u -t svirt_sandbox_file_t /s3`
+7. create s3 folder: `mkdir /s3` && `chmod 777 /s3`
 8. configure automount: `nano /etc/fstab` append `/dev/mapper/s3vg-s3lv /s3 xfs defaults,nofail 0 0` and `mount -a` display all Filesystems: `df -h`
 
 ## Docker images

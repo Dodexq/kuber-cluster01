@@ -1,6 +1,6 @@
 ## Update
 sudo apt update
-sudo apt upgrade
+sudo apt upgrade -y
 ## Install net-tools (route)
 sudo apt install net-tools
 ## Install Docker
@@ -24,3 +24,5 @@ sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.17.0/kind-linux-amd64
 sudo chmod +x ./kind
 sudo mv ./kind /usr/local/bin/kind
+# mkfs.xfs
+sudo apt install xfsprogs -y
