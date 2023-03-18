@@ -48,6 +48,11 @@
 9. minio install `cd /s3/minio` && `mkdir data1-1 data1-2 data2-1 data2-2 data3-1 data3-2 data4-1 data4-2`
 10. `chmod -R 777 data1-1 data1-2 data2-1 data2-2 data3-1 data3-2 data4-1 data4-2`
 11. exec `cd ./minio/docker/` && `docker-compose`
+## Connect Minio Client (mc)
+1. download mc `wget https://dl.min.io/client/mc/release/linux-amd64/mc`
+2. allow exec `chmod +x mc` && `mv ./mc /usr/local/bin/`
+3. configure mc `mc config host add minio http://127.0.0.1:9000 admin Gst4Kuber% --api S3v4`
+4. check backand connect `mc admin trace -v -a --json minio`
 
 #
 
