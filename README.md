@@ -30,12 +30,25 @@
 <a href="https://raw.githubusercontent.com/Dodexq/kuber-cluster01/main/screenshots/argocd_screen01.png" rel="some text"><img src="https://raw.githubusercontent.com/Dodexq/kuber-cluster01/main/screenshots/argocd_screen01.png" alt="" width="500" /></a>
 </p>
 
-## Helm Charts (Resume, GitLab)
-1. `kubectl create ns gitlab `
-2. `helm install gitlab -n gitlab ./gitlab`
+#
+
+## GitLab
+1. create namespace `kubectl create ns gitlab `
+2. install helm app `helm install gitlab -n gitlab ./gitlab`
+3. apply ingress web && ssh `kubectl apply ./helm-chart/gitlab/cluster/ingress-gitlab.yaml && kubectl apply ingress-nginx-tcp.yaml` 
+
+<p align="center"> 
+<a href="https://raw.githubusercontent.com/Dodexq/kuber-cluster01/main/screenshots/gitlab-commit.png" rel="some text"><img src="https://raw.githubusercontent.com/Dodexq/kuber-cluster01/main/screenshots/gitlab-commit.png" alt="" width="500" /></a>
+</p>
+
+#
+
 ## Monitoring
 1. `kubectl create ns monitoring`
 2. `helm install loki -n monitoring loki-stack/ --set loki.persistence.enabled=true`
+
+#
+
 ## Minio S3
 1. configure Vagrantfile: `server.vm.disk :disk, size: "40GB", name: "extra_storage"`
 2. exec `VAGRANT_EXPERIMENTAL=disks vagrant up`
@@ -48,11 +61,6 @@
 9. minio install `cd /s3/minio` && `mkdir data1-1 data1-2 data2-1 data2-2 data3-1 data3-2 data4-1 data4-2`
 10. `chmod -R 777 data1-1 data1-2 data2-1 data2-2 data3-1 data3-2 data4-1 data4-2`
 11. exec `cd ./minio/docker/` && `docker-compose`
-## Connect Minio Client (mc)
-1. download mc `wget https://dl.min.io/client/mc/release/linux-amd64/mc`
-2. allow exec `chmod +x mc` && `mv ./mc /usr/local/bin/`
-3. configure mc `mc config host add minio http://127.0.0.1:9000 admin Gst4Kuber% --api S3v4`
-4. check backend connect `mc admin trace -v -a --json minio`
 
 #
 
@@ -62,6 +70,13 @@
 
 #
 
+## Connect Minio Client (mc)
+1. download mc `wget https://dl.min.io/client/mc/release/linux-amd64/mc`
+2. allow exec `chmod +x mc` && `mv ./mc /usr/local/bin/`
+3. configure mc `mc config host add minio http://127.0.0.1:9000 admin Gst4Kuber% --api S3v4`
+4. check backend connect `mc admin trace -v -a --json minio`
+
+#
 
 ## Docker images
 https://hub.docker.com/u/dodexq
