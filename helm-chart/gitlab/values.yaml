@@ -49,10 +49,10 @@ global:
     allowClusterRoles: true
   ## https://docs.gitlab.com/charts/charts/globals#configure-host-settings
   hosts:
-    domain: gitlab.dodex.site
+    domain:
     hostSuffix:
     https: true
-    externalIP: 172.18.0.101
+    externalIP: 
     ssh: ~
     gitlab: {}
     minio: {}

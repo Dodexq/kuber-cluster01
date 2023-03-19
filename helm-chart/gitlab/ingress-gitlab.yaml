@@ -4,7 +4,7 @@ kind: Ingress
 metadata:
   name: gitlab-ingress
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/cluster-issuer: letsencrypt-staging
 spec:
   ingressClassName: nginx
   tls:
@@ -22,4 +22,11 @@ spec:
             name: gitlab-webservice-default
             port:
               number: 8181
+      - pathType: Prefix
+        path: /
+        backend: 
+          service:
+            name: gitlab-gitlab-shell
+            port:
+              number: 22
 ---

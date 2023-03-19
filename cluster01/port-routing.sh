@@ -8,6 +8,13 @@ sudo iptables -t nat -A PREROUTING -p tcp --dport 10443 -j DNAT --to-destination
 sudo iptables -p tcp -A FORWARD -d 172.18.0.100 --dport 443 -j ACCEPT
 sudo iptables -t nat -A POSTROUTING -t nat -p tcp -m tcp -s 172.18.0.100 --sport 443 -j SNAT --to-source 0.0.0.0
 
+## Gitlab ssh
+
+sudo iptables -t nat -A PREROUTING -p tcp --dport 2322 -j DNAT --to-destination 172.18.0.100:22
+sudo iptables -p tcp -A FORWARD -d 172.18.0.100 --dport 22 -j ACCEPT
+sudo iptables -t nat -A POSTROUTING -t nat -p tcp -m tcp -s 172.18.0.100 --sport 22 -j SNAT --to-source 0.0.0.0
+
+
 ## Minio
 sudo iptables -t nat -A PREROUTING -p tcp --dport 9000 -j DNAT --to-destination 172.19.0.5:9000
 sudo iptables -p tcp -A FORWARD -d 172.19.0.5 --dport 9000 -j ACCEPT

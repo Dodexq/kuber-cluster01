@@ -52,7 +52,7 @@
 1. download mc `wget https://dl.min.io/client/mc/release/linux-amd64/mc`
 2. allow exec `chmod +x mc` && `mv ./mc /usr/local/bin/`
 3. configure mc `mc config host add minio http://127.0.0.1:9000 admin Gst4Kuber% --api S3v4`
-4. check backand connect `mc admin trace -v -a --json minio`
+4. check backend connect `mc admin trace -v -a --json minio`
 
 #
 
