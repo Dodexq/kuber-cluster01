@@ -10,7 +10,7 @@ sudo iptables -t nat -A POSTROUTING -t nat -p tcp -m tcp -s 172.18.0.100 --sport
 
 ## Gitlab ssh
 
-sudo iptables -t nat -A PREROUTING -p tcp --dport 2322 -j DNAT --to-destination 172.18.0.100:22
+sudo iptables -t nat -A PREROUTING -p tcp --dport 2232 -j DNAT --to-destination 172.18.0.100:22
 sudo iptables -p tcp -A FORWARD -d 172.18.0.100 --dport 22 -j ACCEPT
 sudo iptables -t nat -A POSTROUTING -t nat -p tcp -m tcp -s 172.18.0.100 --sport 22 -j SNAT --to-source 0.0.0.0
 
