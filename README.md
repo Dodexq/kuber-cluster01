@@ -49,7 +49,7 @@
 
 #
 
-## Minio S3
+## Minio S3 on docker-compose
 1. configure Vagrantfile: `server.vm.disk :disk, size: "40GB", name: "extra_storage"`
 2. exec `VAGRANT_EXPERIMENTAL=disks vagrant up`
 3. use `fdisk /dev/sdb` create 1 default full partition
@@ -66,6 +66,36 @@
 
 <p align="center"> 
 <a href="https://raw.githubusercontent.com/Dodexq/kuber-cluster01/main/screenshots/minio_test.png" rel="some text"><img src="https://raw.githubusercontent.com/Dodexq/kuber-cluster01/main/screenshots/minio_test.png" alt="" width="500" /></a>
+</p>
+
+#
+
+## Minio S3 in Gitlab helm-chart
+1. add `./helm-chart/gitlab/values.yaml`
+```
+minio:
+    enabled: true
+    credentials:
+      secret: gitlab-minio-secret
+```
+2. check config `kubectl exec -it pod/gitlab-toolbox-xxxxxxxxxx-xxxxx -n gitlab -- cat /home/git/.s3cfg`
+3. add ingress url balancing `./helm-chart/gitlab/cluster/`
+```
+  - host: minio.dodex.site
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: gitlab-minio-svc
+            port:
+              number: 9000
+```
+#
+
+<p align="center"> 
+<a href="https://raw.githubusercontent.com/Dodexq/kuber-cluster01/main/screenshots/minio_test_gitlab.png" rel="some text"><img src="https://raw.githubusercontent.com/Dodexq/kuber-cluster01/main/screenshots/minio_test_gitlab.png" alt="" width="500" /></a>
 </p>
 
 #

@@ -51,11 +51,15 @@ global:
   hosts:
     domain: dodex.site
     hostSuffix:
-    https: true
-    externalIP: 
-    ssh: ~
-    gitlab: {}
-    minio: {}
+    https: false
+    externalIP:
+    ssh: gitlab.dodex.site
+    gitlab: 
+      name: gitlab.dodex.site
+      https: false
+    minio: 
+      name: minio.dodex.site
+      https: false
     registry: {}
     tls: {}
     smartcard: {}
@@ -65,12 +69,12 @@ global:
   ## https://docs.gitlab.com/charts/charts/globals#configure-ingress-settings
   ingress:
     apiVersion: ""
-    configureCertmanager: true
+    configureCertmanager: false
     provider: nginx
     # class:
     annotations: {}
       #cert-manager.io/cluster-issuer: letsencrypt-prod
-    enabled: true
+    enabled: false
     tls: {}
       # enabled: true
       # secretName: app-tls
@@ -190,8 +194,8 @@ global:
   ## https://docs.gitlab.com/charts/charts/globals#configure-minio-settings
   minio:
     enabled: true
-    credentials: {}
-      # secret:
+    credentials:
+      secret: gitlab-minio-secret
 
   ## https://docs.gitlab.com/charts/charts/globals#configure-grafana-integration
   grafana:
