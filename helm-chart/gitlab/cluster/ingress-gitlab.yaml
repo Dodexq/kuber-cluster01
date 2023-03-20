@@ -4,12 +4,13 @@ kind: Ingress
 metadata:
   name: gitlab-ingress
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-staging
+    cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   ingressClassName: nginx
   tls:
   - hosts:
     - gitlab.dodex.site
+    - minio.dodex.site
     secretName: app-tls
   rules:
   - host: gitlab.dodex.site
@@ -22,4 +23,14 @@ spec:
             name: gitlab-webservice-default
             port:
               number: 8181
+  - host: minio.dodex.site
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: gitlab-minio-svc
+            port:
+              number: 9000
 ---
