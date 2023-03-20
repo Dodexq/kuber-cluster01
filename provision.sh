@@ -24,5 +24,9 @@ sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.17.0/kind-linux-amd64
 sudo chmod +x ./kind
 sudo mv ./kind /usr/local/bin/kind
-# mkfs.xfs
+## mkfs.xfs
 sudo apt install xfsprogs -y
+## Install helm
+curl -Lo helm-v3.11.2-linux-amd64.tar.gz https://get.helm.sh/helm-v3.11.2-linux-amd64.tar.gz
+tar zxf helm-v3.11.2-linux-amd64.tar.gz
+sudo mv ./linux-amd64/helm /usr/local/bin/helm
