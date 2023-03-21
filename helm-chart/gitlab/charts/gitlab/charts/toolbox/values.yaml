@@ -135,7 +135,7 @@ global:
       #   key: provider
 backups:
   cron:
-    enabled: false
+    enabled: true
     concurrencyPolicy: Replace
     failedJobsHistoryLimit: 1
     schedule: "0 1 * * *"
@@ -154,7 +154,7 @@ backups:
         cpu: 50m
         memory: 350M
     persistence:
-      enabled: false
+      enabled: true
       ## toolbox temporarily Persistent Volume Storage Class
       ## If defined, storageClassName: <storageClass>
       ## If set to "-", storageClassName: "", which disables dynamic provisioning
@@ -162,10 +162,10 @@ backups:
       ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
       ##   GKE, AWS & OpenStack)
       ##
-      # storageClass: "-"
+      storageClass: "git-backup-storage"
       accessMode: ReadWriteOnce
       size: 10Gi
-      subPath: ""
+      subPath: "tmp/backups"
       ## if volumeName is set, use this existing PersistentVolume
       # volumeName:
       matchLabels: {}

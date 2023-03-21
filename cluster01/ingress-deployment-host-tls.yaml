@@ -112,7 +112,6 @@ spec:
   - hosts:
     - foo.dodex.site
     - bar.dodex.site
-    - board.dodex.site
     secretName: app-tls
   rules:
   - host: foo.dodex.site
@@ -135,15 +134,4 @@ spec:
             name: bar-service
             port:
               number: 80
-  - host: board.dodex.site
-    http:
-      paths:
-      - pathType: Prefix
-        path: /
-        backend: 
-          service:
-            name: kubernetes-dashboard
-            port:
-              number: 443
-
 ---

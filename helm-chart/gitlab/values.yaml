@@ -196,6 +196,7 @@ global:
     enabled: true
     credentials:
       secret: gitlab-minio-secret
+      key: secretkey
 
   ## https://docs.gitlab.com/charts/charts/globals#configure-grafana-integration
   grafana:
@@ -315,9 +316,9 @@ global:
       storage_options: {}
         # server_side_encryption:
         # server_side_encryption_kms_key_id
-      connection: {}
-        # secret:
-        # key:
+      connection:
+        # secret: gitlab-minio-secret
+        # key: secretkey
     lfs:
       enabled: true
       proxy_download: true
@@ -363,7 +364,6 @@ global:
       proxy_download: true
       bucket: gitlab-dependency-proxy
       connection: {}
-
     backups:
       bucket: gitlab-backups
       tmpBucket: tmp
