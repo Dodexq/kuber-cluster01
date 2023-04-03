@@ -16,6 +16,6 @@ spec:
             config:
               regruPasswordSecretRef:
                 name: regru-password
-                key: REGRU_PASSWORD
+                key: password
             groupName: acme.regru.ru
             solverName: regru-dns
