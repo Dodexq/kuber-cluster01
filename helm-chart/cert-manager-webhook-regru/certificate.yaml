@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: foo-dns-sert
+  namespace: cert-manager
+spec:
+  secretName: regru-password
+  issuerRef:
+    name: regru-dns
+    kind: ClusterIssuer
+  dnsNames:
+    -  foo.dodex.site

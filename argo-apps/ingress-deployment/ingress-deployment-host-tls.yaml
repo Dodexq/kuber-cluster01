@@ -101,7 +101,7 @@ kind: Ingress
 metadata:
   name: example-ingress
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/cluster-issuer: regru-dns
 spec:
   ingressClassName: nginx
   tls:

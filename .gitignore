@@ -2,3 +2,6 @@
 data/dodextest.ddns.net/
 ansible.log
 temp/
+regru-passwd.yaml
+helm-chart/cert-manager-webhook-regru/regru-passwd.yaml
+helm-chart/cert-manager-webhook-regru/secret.yaml
