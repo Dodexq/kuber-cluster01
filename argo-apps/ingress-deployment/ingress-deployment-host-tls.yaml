@@ -99,7 +99,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: example-ingress
+  name: example-ingress-foobar
   annotations:
     cert-manager.io/cluster-issuer: regru-dns
 spec:
@@ -108,7 +108,7 @@ spec:
   - hosts:
     - foo.dodex.site
     - bar.dodex.site
-    secretName: app-tls
+    secretName: regru-tls
   rules:
   - host: foo.dodex.site
     http:

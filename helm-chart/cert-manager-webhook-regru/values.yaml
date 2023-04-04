@@ -1,7 +1,7 @@
 issuer:
-  image: ghcr.io/flant/cluster-issuer-regru:1.0.0
-  user: dodexpwnz@gmail.com
-  password: passwd
+  image: ghcr.io/flant/cluster-issuer-regru:1.0.1
+  user: 'dodexpwnz@gmail.com'
+  password: mypasswd
 
 groupName:
   name: acme.regru.ru
