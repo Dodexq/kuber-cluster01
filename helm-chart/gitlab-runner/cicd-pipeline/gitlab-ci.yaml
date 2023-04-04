@@ -1,0 +1,13 @@
+stages:
+  - build
+build-job:
+  stage: build
+  tags: 
+    - test-runner
+  script:
+    - echo "Compiling the code..."
+    - python setup.py sdist
+    - echo "Compile complete."
+  artifacts: 
+    paths:
+      - dist/
