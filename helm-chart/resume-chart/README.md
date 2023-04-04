@@ -6,6 +6,6 @@
 
 ### Minio:
 ```
-accesskey: lu6aJyIWvemelz11Ty4o0zYm8bBRRf4OJOPj6qZwX7vpxU9YTe6E2wQyx0gFREhK
-secretkey: gqQuVhqCOoeZBWgNMPeJYhEe2PMXXnF69iK10J3CnnRz6YpYjBXuQKZiyjfGyoIG
+accesskey: M9QuelnJdiMkOeMBEUg1KozcElSUHA93DNsyAnEeWkzJcIUCTvzVQVBUuWM9sjtF
+secretkey: kg3f2T8rJ8JMOrCaAOusC2j0Tfomtxlrrwpbbyd93gck9Y0YSGf5nrcGrUZZxlw7
 ```

@@ -9,9 +9,9 @@ Vagrant.configure("2") do |config|
   #  server.vm.disk :disk, size: "40GB", name: "extra_storage"
   
   # default router
-  #  server.vm.provision "shell",
-  #  run: "always",
-  #  inline: "route add default gw 192.168.0.1"
+    server.vm.provision "shell",
+    run: "always",
+    inline: "route add default gw 192.168.0.1"
 
   # delete default gw on eth0
   #  server.vm.provision "shell",
